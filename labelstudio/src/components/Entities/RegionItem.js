@@ -75,6 +75,7 @@ const RegionItemContent = observer(({ idx, item, setDraggable }) => {
   const checkHandler = ({ target }) => {
     setChecked(!bChecked);
     checkedItemHandler(item.id, target.checked);
+    console.log("bChecked: ", bChecked);
   };
 
   useEffect(() => {
@@ -90,14 +91,13 @@ const RegionItemContent = observer(({ idx, item, setDraggable }) => {
     }
     //  console.log("bCheckdded :", bChecked);
     //  console.log("checkedItemsbChecked", checkedItems);
-    console.log("item :", item);
+    // console.log("item :", item);
   }, [item.selected]);
 
   const [multiCheck, setMultiCheck] = useState(false);
 
   return (
     <>
-      <input type="checkbox" checked={multiCheck} onChange={e => setMultiCheck(e)} />
       <Block ref={itemElRef} name="region-item" mod={{ hidden: item.hidden }}>
         <Elem name="header" tag="div">
           {/* checkbox 생성 */}

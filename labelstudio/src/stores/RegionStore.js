@@ -148,7 +148,7 @@ export default types
           return;
         }
         if (self.selection.highlighted === item) {
-          self.clearSelection();
+          //self.clearSelection();
           return;
         }
         self.highlight(item);

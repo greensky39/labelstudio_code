@@ -29,6 +29,14 @@ export default observer(({ regionStore, annotation }) => {
   const [test, useTest] = useState(0);
   const [multiCheck, setMultiCheck] = useState(false);
 
+  function MultiButton() {
+    if (multiCheck === false) {
+      setMultiCheck(true);
+    } else {
+      setMultiCheck(false);
+    }
+  }
+
   function Test() {
     useTest(test + 1);
     console.log("test :", test);
@@ -76,7 +84,10 @@ export default observer(({ regionStore, annotation }) => {
       </Elem>
       <Elem name="multiCheck">
         {/* <Space spread> */}
-        <input type="checkbox" checked={multiCheck} onChange={e => setMultiCheck(e)} /> {"다중 선택"}
+        {/* <input type="checkbox"  /> {"다중 선택"} */}
+        <input type="checkbox" /> {"다중 선택"}
+        <button onClick={MultiButton}>버튼1</button>
+        {console.log(("multiCheck :", multiCheck))}
         {/* </Space> */}
       </Elem>
 
