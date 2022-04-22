@@ -26,21 +26,6 @@ export default observer(({ regionStore, annotation }) => {
     regionStore.toggleVisibility();
   };
 
-  const [test, useTest] = useState(0);
-  const [multiCheck, setMultiCheck] = useState(false);
-
-  function MultiButton() {
-    if (multiCheck === false) {
-      setMultiCheck(true);
-    } else {
-      setMultiCheck(false);
-    }
-  }
-
-  function Test() {
-    useTest(test + 1);
-    console.log("test :", test);
-  }
   return (
     <Block name="entities">
       <Elem name="source">
@@ -55,6 +40,7 @@ export default observer(({ regionStore, annotation }) => {
           >
             <RadioGroup.Button value="regions">
               Regions{count ? <Elem name="counter">&nbsp;{count}</Elem> : null}
+              {console.log("regionStore.view :", regionStore.view)}
             </RadioGroup.Button>
             <RadioGroup.Button value="labels">Labels</RadioGroup.Button>
           </RadioGroup>
@@ -82,13 +68,20 @@ export default observer(({ regionStore, annotation }) => {
           </Tooltip>
         </Space>
       </Elem>
-      <Elem name="multiCheck">
-        {/* <Space spread> */}
-        {/* <input type="checkbox"  /> {"다중 선택"} */}
-        <input type="checkbox" /> {"다중 선택"}
-        <button onClick={MultiButton}>버튼1</button>
-        {console.log(("multiCheck :", multiCheck))}
-        {/* </Space> */}
+      <Elem name="checkbox">
+        {/* <input type="checkbox" onChange={e => regionStore.setMultiSelection(e.target.checked)} /> {"Multiple Selection"} */}
+        {"Multiple Selection"}
+        <RadioGroup
+          size="small"
+          value={regionStore.multiSelection}
+          style={{ width: 240 }}
+          onChange={e => {
+            regionStore.setMultiSelection(e.target.value);
+          }}
+        >
+          <RadioGroup.Button value="false">Off</RadioGroup.Button>
+          <RadioGroup.Button value="true">On</RadioGroup.Button>
+        </RadioGroup>
       </Elem>
 
       {count ? (

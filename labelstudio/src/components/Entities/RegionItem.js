@@ -101,10 +101,9 @@ const RegionItemContent = observer(({ idx, item, setDraggable }) => {
       <Block ref={itemElRef} name="region-item" mod={{ hidden: item.hidden }}>
         <Elem name="header" tag="div">
           {/* checkbox 생성 */}
-          <Elem name="checkbox">
+          {/* <Elem name="checkbox">
             {item.selected && <input type="checkbox" checked={item.selected} onChange={e => checkHandler(e)} />}
-            {}
-          </Elem>
+          </Elem> */}
 
           <Elem name="counter">{isDefined(idx) ? idx + 1 : ""}</Elem>
           <Elem name="title" tag={Node} node={item} mix={styles.node} />
@@ -183,7 +182,7 @@ export const RegionItem = observer(({ item, idx, flat, setDraggable, onClick }) 
         key={item.id}
         className={classnames.join(" ")}
         onClick={e => {
-          onClick(e, item);
+          onClick(e, item, true);
         }}
         onMouseOver={() => item.setHighlight(true)}
         onMouseOut={() => item.setHighlight(false)}

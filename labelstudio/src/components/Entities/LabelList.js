@@ -12,7 +12,7 @@ export const LabelList = observer(({ regionStore }) => {
       title: isLabel ? (
         <LabelItem item={item} idx={idx} regions={children} regionStore={regionStore} />
       ) : (
-        <RegionItem item={item} idx={idx} onClick={onClick}/>
+        <RegionItem item={item} idx={idx} onClick={onClick} />
       ),
     };
   });

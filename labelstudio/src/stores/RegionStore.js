@@ -109,6 +109,8 @@ export default types
 
     view: types.optional(types.enumeration(["regions", "labels"]), "regions"),
     selection: types.optional(SelectionMap, {}),
+    // multiSelection: types.maybe(types.boolean),
+    multiSelection: types.optional(types.enumeration(["true", "false"]), "false"),
   })
   .views(self => {
     let lastClickedItem;
@@ -143,12 +145,12 @@ export default types
           return;
         }
         lastClickedItem = item;
-        if (ev.metaKey || ev.ctrlKey) {
+        if (ev.metaKey || ev.ctrlKey || self.multiSelection === "true") {
           self.toggleSelection(item);
           return;
         }
         if (self.selection.highlighted === item) {
-          //self.clearSelection();
+          self.clearSelection();
           return;
         }
         self.highlight(item);
@@ -294,6 +296,10 @@ export default types
     addRegion(region) {
       self.regions.push(region);
       getEnv(self).events.invoke("entityCreate", region);
+    },
+
+    setMultiSelection(multiSelection) {
+      self.multiSelection = multiSelection;
     },
 
     toggleSortOrder() {
